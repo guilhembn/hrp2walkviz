@@ -1,0 +1,21 @@
+<launch>
+
+  <env name="ROS_PACKAGE_PATH" value="$(env ROS_PACKAGE_PATH):/opt/openrobots/share" />
+
+  <arg name="model" />
+  <arg name="hrp2_tracefile" />
+  <arg name="gui" default="false" />
+  <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" />
+  <arg name="joint_source_topic" default="[/hrp2_joints]" />
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+  <param name="tracefile" value="$(arg hrp2_tracefile)" />
+  <rosparam param="source_list" subst_value="True">$(arg joint_source_topic)</rosparam>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+  <node name="hrp2file2joint" pkg="hrp2walkviz" type="tracefile_to_joints.py" />
+
+</launch>
