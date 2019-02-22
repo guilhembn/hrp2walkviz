@@ -5,7 +5,7 @@
   <arg name="model" />
   <arg name="hrp2_tracefile" />
   <arg name="gui" default="false" />
-  <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" />
+  <arg name="rvizconfig" default="$(find hrp2walkviz)/rviz/hrp2.rviz" />
   <arg name="joint_source_topic" default="[/hrp2_joints]" />
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
@@ -15,7 +15,7 @@
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
-  <node name="hrp2file2joint" pkg="hrp2walkviz" type="tracefile_to_joints.py" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" output="screen"/>
+  <node name="hrp2file2joint" pkg="hrp2walkviz" type="tracefile_to_joints.py" output="screen"/>
 
 </launch>
