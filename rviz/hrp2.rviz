@@ -8,8 +8,10 @@ Panels:
         - /Status1
         - /RobotModel1
         - /TF1
+        - /Path1
+        - /Path2
       Splitter Ratio: 0.5
-    Tree Height: 592
+    Tree Height: 565
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -36,7 +38,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 160; 160; 164
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.03
         Value: Lines
@@ -49,8 +51,8 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
-      Value: true
-    - Alpha: 0.5
+      Value: false
+    - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
       Enabled: true
@@ -226,126 +228,86 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        BODY:
-          Value: true
-        CHEST_LINK0:
-          Value: true
-        HEAD_LINK0:
-          Value: true
-        HEAD_LINK1:
-          Value: true
-        LARM_LINK0:
-          Value: true
-        LARM_LINK1:
-          Value: true
-        LARM_LINK2:
-          Value: true
-        LARM_LINK3:
-          Value: true
-        LARM_LINK4:
-          Value: true
-        LARM_LINK6:
-          Value: true
-        LLEG_LINK0:
-          Value: true
-        LLEG_LINK1:
-          Value: true
-        LLEG_LINK2:
-          Value: true
-        LLEG_LINK3:
-          Value: true
-        LLEG_LINK4:
-          Value: true
-        RARM_LINK0:
-          Value: true
-        RARM_LINK1:
-          Value: true
-        RARM_LINK2:
-          Value: true
-        RARM_LINK3:
-          Value: true
-        RARM_LINK4:
-          Value: true
-        RARM_LINK6:
-          Value: true
-        RLEG_LINK0:
-          Value: true
-        RLEG_LINK1:
-          Value: true
-        RLEG_LINK2:
-          Value: true
-        RLEG_LINK3:
-          Value: true
-        RLEG_LINK4:
-          Value: true
-        base_link:
-          Value: true
-        l_ankle:
-          Value: true
-        l_wrist:
-          Value: true
-        r_ankle:
-          Value: true
-        r_wrist:
-          Value: true
-        robot_start:
-          Value: true
-        torso:
-          Value: true
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        robot_start:
-          base_link:
-            BODY:
-              CHEST_LINK0:
-                torso:
-                  HEAD_LINK0:
-                    HEAD_LINK1:
-                      {}
-                  LARM_LINK0:
-                    LARM_LINK1:
-                      LARM_LINK2:
-                        LARM_LINK3:
-                          LARM_LINK4:
-                            l_wrist:
-                              LARM_LINK6:
-                                {}
-                  RARM_LINK0:
-                    RARM_LINK1:
-                      RARM_LINK2:
-                        RARM_LINK3:
-                          RARM_LINK4:
-                            r_wrist:
-                              RARM_LINK6:
-                                {}
-              LLEG_LINK0:
-                LLEG_LINK1:
-                  LLEG_LINK2:
-                    LLEG_LINK3:
-                      LLEG_LINK4:
-                        l_ankle:
-                          {}
-              RLEG_LINK0:
-                RLEG_LINK1:
-                  RLEG_LINK2:
-                    RLEG_LINK3:
-                      RLEG_LINK4:
-                        r_ankle:
-                          {}
+        {}
       Update Interval: 0
+      Value: false
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 0; 0
+      Enabled: true
+      Head Diameter: 0.3
+      Head Length: 0.2
+      Length: 0.3
+      Line Style: Lines
+      Line Width: 0.03
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.03
+      Shaft Diameter: 0.1
+      Shaft Length: 0.1
+      Topic: /move_base_node/TebLocalPlannerROS/local_plan
+      Unreliable: false
+      Value: true
+    - Alpha: 0.7
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: Map
+      Topic: /map
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.3
+      Head Length: 0.2
+      Length: 0.3
+      Line Style: Lines
+      Line Width: 0.03
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.03
+      Shaft Diameter: 0.1
+      Shaft Length: 0.1
+      Topic: /move_base_node/TebLocalPlannerROS/global_plan
+      Unreliable: false
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /move_humans_node/human_markers
+      Name: MarkerArray
+      Namespaces:
+        "": true
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: robot_start
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -366,30 +328,47 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.48689
+      Distance: 45.7777
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 1.31565
+        Y: -2.4614
+        Z: 0.53524
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.445397
+      Pitch: 0.375397
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.413582
-    Saved: ~
+      Yaw: 1.28041
+    Saved:
+      - Class: rviz/Orbit
+        Distance: 4.48689
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.06
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Focal Point:
+          X: 0
+          Y: 0
+          Z: 0
+        Name: Orbit
+        Near Clip Distance: 0.01
+        Pitch: 0.375397
+        Target Frame: <Fixed Frame>
+        Value: Orbit (rviz)
+        Yaw: 0.103582
 Window Geometry:
   Displays:
     collapsed: false
   Height: 882
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000016a000002e2fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000002e2000000e300fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000002e2fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730100000028000002e2000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004c000000044fc0100000002fb0000000800540069006d00650100000000000004c0000002f500fffffffb0000000800540069006d006501000000000000045000000000000000000000023b000002e200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a000002c7fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000043000002c7000000e300fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000002c7fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730100000043000002c7000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004c000000044fc0100000002fb0000000800540069006d00650100000000000004c00000027f00fffffffb0000000800540069006d006501000000000000045000000000000000000000023b000002c700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -399,5 +378,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1216
-  X: 55
-  Y: 18
+  X: 702
+  Y: 172
